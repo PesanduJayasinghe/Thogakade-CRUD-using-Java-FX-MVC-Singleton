@@ -30,7 +30,7 @@ public class CustomerInfoControl implements Initializable {
         double salary= Double.parseDouble(txtSalary.getText());
         String address=txtAddress.getText();
         String city=txtCity.getText();
-        String province= (String) txtProvince.getValue();
+        String province= txtProvince.getValue();
         String postalCode=txtPostalCode.getText();
 
         customerController.addCustomerDetails(custId,title,name,dob,salary,address,city,province,postalCode);
@@ -65,7 +65,7 @@ public class CustomerInfoControl implements Initializable {
         double salary= Double.parseDouble(txtSalary.getText());
         String address=txtAddress.getText();
         String city=txtCity.getText();
-        String province= (String) txtProvince.getValue();
+        String province= txtProvince.getValue();
         String postalCode=txtPostalCode.getText();
 
         customerController.updateCustomerDetails(custId,title,name,dob,salary,address,city,province,postalCode);
