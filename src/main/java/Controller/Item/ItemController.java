@@ -32,7 +32,7 @@ public class ItemController implements ItemService{
         try  {
             Connection connection = DBConnection.getInstance().getConnection();
             PreparedStatement ps = connection.prepareStatement(
-                    "UPDATE item SET description=?, category=?, unitPrice=?, qtyOnHand=? WHERE itemCode=?"
+                    "UPDATE item SET description=?, packsize=?, unitPrice=?, qtyOnHand=? WHERE itemCode=?"
             );
             ps.setObject(1, description);
             ps.setObject(2, packSize);
