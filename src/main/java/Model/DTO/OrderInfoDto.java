@@ -10,7 +10,7 @@ import lombok.*;
 public class OrderInfoDto {
 
     private String orderId;
-    private String dob;
+    private String orderDate;
     private String custId;
 
 }
