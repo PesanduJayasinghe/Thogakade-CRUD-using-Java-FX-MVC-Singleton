@@ -1,14 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Controller.Orders.OrderInfoControl"
-            prefHeight="400.0" prefWidth="600.0">
+<AnchorPane prefHeight="520.0" prefWidth="903.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Orders.OrderInfoControl">
+
+    <children>
+
+
+
+        <Button layoutX="35.0" layoutY="469.0" mnemonicParsing="false" onAction="#btnAdd" prefHeight="26.0" prefWidth="91.0" text="ADD" />
+        <Button layoutX="137.0" layoutY="469.0" mnemonicParsing="false" onAction="#btnUpdate" prefHeight="26.0" prefWidth="91.0" text="UPDATE" />
+        <Button layoutX="235.0" layoutY="469.0" mnemonicParsing="false" onAction="#btnDelete" prefHeight="26.0" prefWidth="91.0" text="DELETE" />
+        <Button layoutX="406.0" layoutY="469.0" mnemonicParsing="false" onAction="#btnCustomer" prefHeight="26.0" prefWidth="100.0" text="Customer" />
+        <Button layoutX="518.0" layoutY="469.0" mnemonicParsing="false" onAction="#btnItem" prefHeight="26.0" prefWidth="109.0" text="Item" />
+        <Button layoutX="642.0" layoutY="469.0" mnemonicParsing="false" onAction="#btnOrderDetail" prefHeight="26.0" prefWidth="118.0" text="Order Detail" />
+        <Label layoutX="385.0" layoutY="26.0" text="Order Form">
+            <font>
+                <Font size="23.0" />
+            </font>
+        </Label>
+        <TableView fx:id="tblItem" layoutX="34.0" layoutY="73.0" prefHeight="327.0" prefWidth="836.0">
+            <columns>
+                <TableColumn fx:id="col_order_id" prefWidth="241.6000213623047" text="Order Id" />
+                <TableColumn fx:id="col_order_date" prefWidth="319.20001220703125" text="Order Date" />
+                <TableColumn fx:id="col_cust_id" prefWidth="273.60003662109375" text="Cust Id" />
+            </columns>
+        </TableView>
+        <TextField fx:id="txtOrderId" layoutX="174.0" layoutY="422.0" prefHeight="26.0" prefWidth="160.0" promptText="Order Id" />
+        <TextField fx:id="txtorderDate" layoutX="399.0" layoutY="422.0" prefHeight="26.0" prefWidth="160.0" promptText="Order Date" />
+        <TextField fx:id="txtCustId" layoutX="621.0" layoutY="422.0" prefHeight="26.0" prefWidth="160.0" promptText="Cust Id" />
+      <Button layoutX="771.0" layoutY="469.0" mnemonicParsing="false" onAction="#btnMenu" prefHeight="26.0" prefWidth="91.0" text="Menu" />
+
+    </children>
 
 </AnchorPane>
