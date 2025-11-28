@@ -1,7 +1,8 @@
 package Controller.Orders;
 
+import Controller.OrderDetail.OrderDetailService;
 import DB.DBConnection;
-import Model.DTO.OrderInfoDto;
+import Model.DTO.OrderDetailInfoDto;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -10,18 +11,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class OrderController implements OrderService{
+public class OrderDetailController implements OrderDetailService {
 
     @Override
-    public void addOrderInfo(String orderId, String orderDate, String custId) {
+    public void addOrderDetailInfo(String orderId, String itemCode, int orderQty, double discount) {
         try {
             Connection connection = DBConnection.getInstance().getConnection();
             PreparedStatement ps = connection.prepareStatement(
-                    "INSERT INTO orders VALUES (?, ?, ?)"
+                    "INSERT INTO orderdetail VALUES (?, ?, ?, ?)"
             );
             ps.setObject(1, orderId);
-            ps.setObject(2, orderDate);
-            ps.setObject(3, custId);
+            ps.setObject(2, itemCode);
+            ps.setObject(3, orderQty);
+            ps.setObject(4, discount);
             ps.executeUpdate();
 
         } catch (SQLException e) {
@@ -30,15 +32,16 @@ public class OrderController implements OrderService{
     }
 
     @Override
-    public void updateOrderInfo(String orderId, String orderDate, String custId) {
+    public void updateOrderDetailInfo(String orderId, String itemCode, int orderQty, double discount) {
         try {
             Connection connection = DBConnection.getInstance().getConnection();
             PreparedStatement ps = connection.prepareStatement(
-                    "UPDATE orders SET OrderDate=?, CustID=? WHERE OrderID=?"
+                    "UPDATE orderdetail SET OrderQTY=?, Discount=? WHERE OrderID=? AND ItemCode=?"
             );
-            ps.setObject(1, orderDate);
-            ps.setObject(2, custId);
+            ps.setObject(1, orderQty);
+            ps.setObject(2, discount);
             ps.setObject(3, orderId);
+            ps.setObject(4, itemCode);
             ps.executeUpdate();
 
         } catch (SQLException e) {
@@ -47,13 +50,14 @@ public class OrderController implements OrderService{
     }
 
     @Override
-    public void deleteOrderInfo(String orderId) {
+    public void deleteOrderDetailInfo(String orderId, String itemCode) {
         try {
             Connection connection = DBConnection.getInstance().getConnection();
             PreparedStatement ps = connection.prepareStatement(
-                    "DELETE FROM orders WHERE OrderID=?"
+                    "DELETE FROM orderdetail WHERE OrderID=? AND ItemCode=?"
             );
             ps.setObject(1, orderId);
+            ps.setObject(2, itemCode);
             ps.executeUpdate();
 
         } catch (SQLException e) {
@@ -62,19 +66,20 @@ public class OrderController implements OrderService{
     }
 
     @Override
-    public ObservableList<OrderInfoDto> loadOrderTable() {
-        ObservableList<OrderInfoDto> orderInfoArray = FXCollections.observableArrayList();
+    public ObservableList<OrderDetailInfoDto> loadOrderDetailTable() {
+        ObservableList<OrderDetailInfoDto> detailsArray = FXCollections.observableArrayList();
 
         try {
             Connection connection = DBConnection.getInstance().getConnection();
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM orders");
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM orderdetail");
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                orderInfoArray.add(new OrderInfoDto(
+                detailsArray.add(new OrderDetailInfoDto(
                         rs.getString("OrderID"),
-                        rs.getString("OrderDate"),
-                        rs.getString("CustID")
+                        rs.getString("ItemCode"),
+                        rs.getInt("OrderQTY"),
+                        rs.getInt("Discount")
                 ));
             }
 
@@ -82,6 +87,6 @@ public class OrderController implements OrderService{
             throw new RuntimeException(e);
         }
 
-        return orderInfoArray;
+        return detailsArray;
     }
 }
